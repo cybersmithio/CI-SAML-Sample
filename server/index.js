@@ -51,6 +51,8 @@ function getidp(req) {
   let properties = null;
 
   let uuid = req.query.uuid;
+  console.log("UUID:");
+  console.log(uuid)  
   if (typeof uuid === 'undefined') {
     uuid = req.universalCookies.get('sample-saml-cookie');
   } else {
