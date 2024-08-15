@@ -52,9 +52,12 @@ function getidp(req) {
 
   let uuid = req.query.uuid;
   console.log("UUID:");
-  console.log(uuid)  
+  console.log(uuid);
   if (typeof uuid === 'undefined') {
     uuid = req.universalCookies.get('sample-saml-cookie');
+    console.log("Retieving UUID from 'sample-saml-cookie' cookie:");
+    console.log(uuid);
+  
   } else {
     if (HOSTNAME.toLowerCase().startsWith("https")) {
       req.universalCookies.set('sample-saml-cookie', uuid, {
@@ -63,12 +66,18 @@ function getidp(req) {
         maxAge: '2147483647',
         secure: true
       });
+      console.log("Saved 'sample-saml-cookie' with value:");
+      console.log(uuid);
+
     } else {
       req.universalCookies.set('sample-saml-cookie', uuid, {
         path: '/',
         maxAge: '2147483647',
         sameSite: 'none'
       });
+      console.log("Saved 'sample-saml-cookie' with value:");
+      console.log(uuid);
+
     }
   }
 
