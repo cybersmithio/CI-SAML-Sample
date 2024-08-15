@@ -4,14 +4,15 @@
 
 ```
 docker build -t samltestapp ./ -f Dockerfile
-docker run --rm -it --name samltestapp -p 3000:3000 samltestapp
+docker run --rm -it --name samltestapp -p 3006:3006 samltestapp
 ```
 
 
 
 
 # Debugging
-docker run --rm -it --name samltestapp -p 3000:3000 samltestapp /bin/sh
+docker run --rm -it --name samltestapp -p 3006:3006 samltestapp sh
+docker exec -it samltestapp sh
 
 # Export and import
 docker image save samltestapp -o samltestapp.tar
