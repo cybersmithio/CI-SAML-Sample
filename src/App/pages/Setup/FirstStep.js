@@ -52,7 +52,7 @@ class FirstStep extends Component {
      console.log(`Created  UUID ${uuid}`);
 
      if (window.location.protocol === 'https:') {
-       console.log(`Setting 'sample-saml-cookie' cookie with UUID ${uuid}`);
+       console.log(`Setting secure 'sample-saml-cookie' cookie with UUID ${uuid}`);
        cookies.set('sample-saml-cookie', uuid, {
          path: '/',
          maxAge: '2147483647',
@@ -60,7 +60,7 @@ class FirstStep extends Component {
          secure: true
        });
      } else {
-      console.log(`Setting 'sample-saml-cookie' cookie with UUID ${uuid}`);
+      console.log(`Setting unsecure 'sample-saml-cookie' cookie with UUID ${uuid}`);
       cookies.set('sample-saml-cookie', uuid, {
          path: '/',
          maxAge: '2147483647',
