@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 COPY build/ ./build/
 COPY properties/ ./properties/
 COPY public/ ./public/
-COPY server/ ./buiserverld/
+COPY server/ ./server/
 COPY server-build/ ./server-build/
 COPY src/ ./src/
 COPY .env/ ./
@@ -30,6 +30,10 @@ COPY webpack.server.js ./
 
 #RUN npm install && npm run clean && npm run build
 RUN npm install
+#RUN npx webpack --config webpack.server.js --mode=development
+RUN export NODE_OPTIONS=--openssl-legacy-provider && \
+    npm run build
+
 #RUN npm run clean
 #RUN npm run build
 # COPY . ./
