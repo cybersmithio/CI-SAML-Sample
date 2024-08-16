@@ -51,6 +51,7 @@ function getidp(req) {
   let properties = null;
 
   let uuid = req.query.uuid;
+  console.log("getidp(req) function start");
   console.log("UUID:");
   console.log(uuid);
   if (typeof uuid === 'undefined') {

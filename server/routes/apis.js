@@ -12,8 +12,13 @@ app.use(bodyParser.urlencoded({
 
 router.get('/v1.0/config/status', function(req, res, next) {
   let uuid = req.query.uuid;
+  
+  console.log("UUID:");
+  console.log(uuid);
+
 
   if (uuid) {
+  console.log(`Reading properties/properties-${uuid}.json`);
   fs.readFile(`properties/properties-${uuid}.json`, function(err, data) {
     if (!err) {
     var properties = JSON.parse(data);
@@ -30,6 +35,8 @@ router.get('/v1.0/config/status', function(req, res, next) {
   }
   });
 } else {
+  console.log(`Reading properties.json`);
+
   fs.readFile('properties.json', function(err, data) {
     if (!err) {
     var properties = JSON.parse(data);
@@ -50,7 +57,12 @@ router.get('/v1.0/config/status', function(req, res, next) {
 router.get('/v1.0/config/properties', function(req, res, next) {
   let uuid = req.query.uuid;
 
+  console.log("UUID:");
+  console.log(uuid);
+
   if (uuid) {
+    console.log(`Reading properties/properties-${uuid}.json`);
+
     fs.readFile(`properties/properties-${uuid}.json`, function(err, data) {
       if (!err) {
       res.json({
@@ -71,6 +83,8 @@ router.get('/v1.0/config/properties', function(req, res, next) {
     }
     });
   } else {
+    console.log(`Reading properties.json`);
+
     fs.readFile('properties.json', function(err, data) {
       if (!err) {
       res.json({
@@ -105,6 +119,9 @@ if (setup != "false") {
       })
     } else {
       let uuid = req.query.uuid;
+      console.log("Reading UUID from req.query:");
+      console.log(uuid);
+    
       var setProperties = {
         "loginurl": settings.loginurl,
         "logouturl": settings.logouturl,
@@ -119,11 +136,15 @@ if (setup != "false") {
       })
       console.log('Successfully modified the configuration');
       if (uuid) {
+        console.log(`Writing properties/properties-${uuid}.json`);
+
         fs.writeFileSync(`properties/properties-${uuid}.json`, data, (err) => {
           if (err) throw err;
           console.log('Notification inside write');
         });
       } else {
+        console.log(`Writing properties.json`);
+
         fs.writeFileSync('properties.json', data, (err) => {
           if (err) throw err;
           console.log('Notification inside write');

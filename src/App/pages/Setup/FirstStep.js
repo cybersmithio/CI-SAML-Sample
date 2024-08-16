@@ -43,12 +43,16 @@ class FirstStep extends Component {
     return uuid;
   }
 
-  componentDidMount(){
+  componentDidMount() {
 
    var uuid = cookies.get('sample-saml-cookie');
+   console.log(`UUID from cookie ${uuid}`);
    if (!uuid) {
      uuid = this.create_UUID();
+     console.log(`Created  UUID ${uuid}`);
+
      if (window.location.protocol === 'https:') {
+       console.log(`Setting 'sample-saml-cookie' cookie with UUID ${uuid}`);
        cookies.set('sample-saml-cookie', uuid, {
          path: '/',
          maxAge: '2147483647',
@@ -56,7 +60,8 @@ class FirstStep extends Component {
          secure: true
        });
      } else {
-       cookies.set('sample-saml-cookie', uuid, {
+      console.log(`Setting 'sample-saml-cookie' cookie with UUID ${uuid}`);
+      cookies.set('sample-saml-cookie', uuid, {
          path: '/',
          maxAge: '2147483647',
          sameSite: 'none'
@@ -76,6 +81,7 @@ class FirstStep extends Component {
       .then(response => response.text())
       .then(result => {
         var precheck = JSON.parse(result)
+        console.log("componentDidMount() fetch")
         console.log(precheck)
         if(precheck.code == '201'){
           this.setState({

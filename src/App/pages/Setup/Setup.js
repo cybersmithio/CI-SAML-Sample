@@ -29,6 +29,7 @@ class Setup extends Component {
     this.preload = this.preload.bind(this);
   }
   output(evt) {
+        console.log("Setup.js output()")
         console.log(evt)
         var key = evt.key;
         var value = evt.value;
@@ -40,20 +41,24 @@ class Setup extends Component {
         logouturl: evt.logouturl,
         certificate: evt.certificate,
         preload: evt.preload})
+        console.log("Setup.js preload()")
         console.log(evt)
   }
   increaseStep() {
+    console.log("increaseStep() in Setup.js")
       this.setState(state => ({
         progressStep: state.progressStep+1
       }));
   }
   decreaseStep() {
+    console.log("decreaseStep() in Setup.js")
       this.setState(state => ({
         progressStep: state.progressStep-1
       }));
   }
 
   render() {
+    console.log("render() in Setup.js")
     return (
       <div className="bx--grid landing-page">
         <div className="bx--row landing-page__breadcrumb">
