@@ -1,5 +1,13 @@
-# Building the container image
+# Building outside a container
 
+To recompile:
+npx webpack --config webpack.server.js --mode=development
+
+npx webpack --config webpack.server.js
+
+
+
+# Building the container image
 
 
 ```
