@@ -15,11 +15,14 @@ docker build -t samltestapp ./ -f Dockerfile
 docker run --rm -it --name samltestapp -p 3006:3006 samltestapp
 ```
 
+Go to https://localhost:3006/.  You must use HTTPS or the cookies will not set properly for this to work.
 
 
 
-# Debugging
+# Examine a new container
 docker run --rm -it --name samltestapp -p 3006:3006 samltestapp sh
+
+# Examine a running container
 docker exec -it samltestapp sh
 
 # Export and import
