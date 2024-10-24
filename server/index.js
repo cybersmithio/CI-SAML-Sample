@@ -50,43 +50,8 @@ app.use(cookieMiddleware());
 function getidp(req) {
   let properties = null;
 
-  let uuid = req.query.uuid;
-  console.log("getidp(req) function start");
-  console.log("UUID:");
-  console.log(uuid);
-  if (typeof uuid === 'undefined') {
-    uuid = req.universalCookies.get('sample-saml-cookie');
-    console.log("Retieving UUID from 'sample-saml-cookie' cookie:");
-    console.log(uuid);
-  
-  } else {
-    if (HOSTNAME.toLowerCase().startsWith("https")) {
-      req.universalCookies.set('sample-saml-cookie', uuid, {
-        path: '/',
-        sameSite: 'none',
-        maxAge: '2147483647',
-        secure: true
-      });
-      console.log("Saved 'sample-saml-cookie' with value:");
-      console.log(uuid);
-
-    } else {
-      req.universalCookies.set('sample-saml-cookie', uuid, {
-        path: '/',
-        maxAge: '2147483647',
-        sameSite: 'none'
-      });
-      console.log("Saved 'sample-saml-cookie' with value:");
-      console.log(uuid);
-
-    }
-  }
-
-  if (uuid) {
-    properties = JSON.parse(fs.readFileSync(`properties/properties-${uuid}.json`));
-  } else {
-    properties = JSON.parse(fs.readFileSync('properties.json'));
-  }
+  // Get rid of UUID for properties and just use the properties.json file
+  properties = JSON.parse(fs.readFileSync('properties.json'));
 
   let idp_options = {
     sso_login_url: properties.loginurl,
