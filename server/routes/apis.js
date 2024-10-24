@@ -16,25 +16,6 @@ router.get('/v1.0/config/status', function(req, res, next) {
   console.log("UUID:");
   console.log(uuid);
 
-
-  if (uuid) {
-  console.log(`Reading properties/properties-${uuid}.json`);
-  fs.readFile(`properties/properties-${uuid}.json`, function(err, data) {
-    if (!err) {
-    var properties = JSON.parse(data);
-    res.json({
-      'status': (properties.loginurl || properties.logouturl || properties.certificate) ? true : false,
-      'allowed': (setup != "false") ? true : false
-    })
-    console.log(err);
-  } else {
-    res.json({
-      'status': false,
-      'allowed': (setup != "false") ? true : false
-    })
-  }
-  });
-} else {
   console.log(`Reading properties.json`);
 
   fs.readFile('properties.json', function(err, data) {
@@ -51,7 +32,7 @@ router.get('/v1.0/config/status', function(req, res, next) {
     })
   }
   });
-}
+
 })
 
 router.get('/v1.0/config/properties', function(req, res, next) {
@@ -60,29 +41,6 @@ router.get('/v1.0/config/properties', function(req, res, next) {
   console.log("UUID:");
   console.log(uuid);
 
-  if (uuid) {
-    console.log(`Reading properties/properties-${uuid}.json`);
-
-    fs.readFile(`properties/properties-${uuid}.json`, function(err, data) {
-      if (!err) {
-      res.json({
-        'code': '201',
-        'message': JSON.parse(data),
-        'error': false
-      })
-      console.log(JSON.parse(data))
-    } else {
-      res.json({
-        'code': '201',
-        'message': {
-          loginurl: '',
-          logouturl: '',
-          certificate: ''
-        }
-      })
-    }
-    });
-  } else {
     console.log(`Reading properties.json`);
 
     fs.readFile('properties.json', function(err, data) {
@@ -104,7 +62,7 @@ router.get('/v1.0/config/properties', function(req, res, next) {
       })
     }
     });
-  }
+  
 })
 
 if (setup != "false") {
