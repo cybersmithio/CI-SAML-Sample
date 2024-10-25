@@ -93,21 +93,14 @@ if (setup != "false") {
         'nextMethod': "GET"
       })
       console.log('Successfully modified the configuration');
-      if (uuid) {
-        console.log(`Writing properties/properties-${uuid}.json`);
 
-        fs.writeFileSync(`properties/properties-${uuid}.json`, data, (err) => {
-          if (err) throw err;
-          console.log('Notification inside write');
-        });
-      } else {
-        console.log(`Writing properties.json`);
+      console.log(`Writing properties.json`);
 
-        fs.writeFileSync('properties.json', data, (err) => {
-          if (err) throw err;
-          console.log('Notification inside write');
-        });
-      }
+      fs.writeFileSync('properties.json', data, (err) => {
+        if (err) throw err;
+        console.log('Notification inside write');
+      });
+
     }
   })
 }
